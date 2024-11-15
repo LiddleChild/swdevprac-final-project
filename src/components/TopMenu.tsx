@@ -7,26 +7,29 @@ export default async function TopMenu() {
   const session = await getServerSession();
 
   return (
-    <div className="relative w-full h-16 flex flex-row justify-between items-center gap-4">
-      {session ? (
-        <TopMenuItem title="Sign-Out" pageRef="/api/auth/signout" />
-      ) : (
-        <TopMenuItem title="Sign-In" pageRef="/api/auth/signin" />
-      )}
-      <TopMenuItem title="My Booking" pageRef="mybooking" />
-      <div className="w-full h-16 flex flex-row justify-end items-center">
-        <TopMenuItem title="Booking" icon="syringe" pageRef="/booking" />
-        <div className="relative w-32 h-16">
-          <Link href="/">
-            <Image
-              src="/img/logo.png"
-              alt="vaccine logo"
-              className="size-full object-contain"
-              fill
-              style={{ objectFit: "contain" }}
-            />
-          </Link>
+    <div className="fixed top-0 left-0 h-screen flex flex-col justify-between items-center bg-[#15B69B] group hover:w-[15%] transition-all duration-300 w-[5%] z-10">
+      <div className="flex flex-col items-center gap-4 mt-20 w-full">
+        <div className="h-20 w-full">
+          <TopMenuItem title="Dentist" icon="Dentistry" pageRef="/dentist" />
         </div>
+        <div className="h-20 w-full">
+          <TopMenuItem
+            title="Booking"
+            icon="calendar_today"
+            pageRef="/booking"
+          />
+        </div>
+      </div>
+      <div className="mb-8 h-20 w-full">
+        {session ? (
+          <TopMenuItem
+            title="Logout"
+            icon="Logout"
+            pageRef="/api/auth/signout"
+          />
+        ) : (
+          <TopMenuItem title="Login" icon="Login" pageRef="/api/auth/signin" />
+        )}
       </div>
     </div>
   );

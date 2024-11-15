@@ -28,11 +28,15 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         />
       </head>
-      <body className={`${notoSansThai.className} flex flex-col w-full h-screen`}>
+      <body
+        className={`${notoSansThai.className} flex flex-col w-full h-screen`}
+      >
         <ReduxProvider>
           <NextAuthProvider session={nextAuthSession}>
-            <TopMenu />
-            <div className="size-full flex flex-col">{children}</div>
+            <div className="flex flex-row">
+              <TopMenu />
+              <div className="size-full ml-[5%] h-screen">{children}</div>
+            </div>
           </NextAuthProvider>
         </ReduxProvider>
       </body>

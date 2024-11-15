@@ -6,14 +6,25 @@ type TopMenuItemProps = {
   pageRef: string;
 };
 
-export default function TopMenuItem({ title, icon, pageRef }: TopMenuItemProps) {
+export default function TopMenuItem({
+  title,
+  icon,
+  pageRef,
+}: TopMenuItemProps) {
   return (
     <Link
       href={pageRef}
-      className="flex flex-row items-center justify-center gap-1 h-full px-6 hover:bg-gray-200 whitespace-nowrap"
+      className="flex flex-row items-center justify-start gap-4 h-full w-full px-6 hover:bg-[#009078] group"
     >
-      {title}
-      {!!icon && <span className="material-symbols-outlined"> {icon} </span>}
+      <span
+        className="material-symbols-outlined flex-shrink-0 text-center"
+        style={{ fontSize: "48px", minWidth: "48px", textAlign: "center" }}
+      >
+        {icon}
+      </span>
+      <span className="transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:ml-2 whitespace-nowrap text-2xl">
+        {title}
+      </span>
     </Link>
   );
 }
