@@ -1,12 +1,9 @@
 "use client";
 
 import DateReserve from "@/components/DateReserve";
-import { addBooking } from "@/redux/features/bookSlice";
-import { AppDispatch } from "@/redux/store";
 import { Button, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import React, { useReducer } from "react";
-import { useDispatch } from "react-redux";
 
 type BookingFormAction = {
   name: string;
@@ -50,12 +47,6 @@ export default function BookingPage() {
     });
   };
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const submitHandler = () => {
-    dispatch(addBooking(form));
-  };
-
   return (
     <div className="flex justify-center items-center size-full">
       <div className="flex flex-col gap-4 w-full max-w-[512px] mx-4">
@@ -87,7 +78,7 @@ export default function BookingPage() {
             <MenuItem value="Thammasat University Hospital">Thammasat University Hospital</MenuItem>
           </Select>
           <DateReserve value={dayjs(form["bookDate"])} onChange={datePickerHandler} />
-          <Button name="Book Vaccine" variant="contained" onClick={submitHandler}>
+          <Button name="Book Vaccine" variant="contained" onClick={() => console.log("submit")}>
             Book Vaccine
           </Button>
         </form>

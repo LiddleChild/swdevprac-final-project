@@ -4,7 +4,6 @@ import "./globals.css";
 import TopMenu from "@/components/TopMenu";
 import { getServerSession } from "next-auth";
 import NextAuthProvider from "@/providers/NextAuthProvider";
-import ReduxProvider from "@/redux/ReduxProvider";
 
 const notoSansThai = Noto_Sans_Thai({ subsets: [] });
 
@@ -28,17 +27,13 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         />
       </head>
-      <body
-        className={`${notoSansThai.className} flex flex-col w-full h-screen`}
-      >
-        <ReduxProvider>
-          <NextAuthProvider session={nextAuthSession}>
-            <div className="flex flex-row">
-              <TopMenu />
-              <div className="size-full ml-[5%] h-screen">{children}</div>
-            </div>
-          </NextAuthProvider>
-        </ReduxProvider>
+      <body className={`${notoSansThai.className} flex flex-col w-full h-screen`}>
+        <NextAuthProvider session={nextAuthSession}>
+          <div className="flex flex-row">
+            <TopMenu />
+            <div className="size-full ml-[5%] h-screen">{children}</div>
+          </div>
+        </NextAuthProvider>
       </body>
     </html>
   );
