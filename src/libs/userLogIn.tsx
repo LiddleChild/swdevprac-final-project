@@ -1,20 +1,28 @@
-export default async function userLogIn(userEmail: string, userPassword: string) {
-  const url = new URL(`/api/v1/auth/login`, "https://vaccine-app-backend-zeta.vercel.app:443").href;
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: userEmail,
-      password: userPassword,
-    }),
-  });
+export default async function userLogIn(email: string, password: string) {
+  let response;
+  let content;
+  try {
+    const url = new URL(`/api/v1/auth/login`, process.env.BACKEND_URL).href;
+    response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
 
-  if (!response.ok) {
-    console.log(await response.json());
-    throw new Error("Failed to login");
+    content = await response.json();
+  } catch (err) {
+    console.error(err);
+    throw new Error("Something went wrong. Please try again later.");
   }
 
-  return await response.json();
+  if (!response.ok) {
+    throw new Error(content.msg);
+  }
+
+  return content;
 }
