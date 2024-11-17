@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 export default function Login() {
   const router = useRouter();
 
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -19,11 +20,15 @@ export default function Login() {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
+    setLoading(true);
+
     const response = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
+
+    setLoading(false);
 
     if (response!.ok) {
       router.push("/");
@@ -48,7 +53,10 @@ export default function Login() {
             <input
               type="text"
               ref={emailRef}
-              className="mt-2 w-full px-3 py-2 border border-ci-gray rounded-lg bg-ci-gray focus:outline-none focus:border-gray-400"
+              className="mt-2 w-full px-3 py-2 border border-ci-gray rounded-lg bg-ci-gray
+              focus:outline-none focus:border-gray-400
+              disabled:bg-opacity-50"
+              disabled={isLoading}
             />
           </div>
           <div className="w-full max-w-[384px]">
@@ -56,11 +64,19 @@ export default function Login() {
             <input
               type="text"
               ref={passwordRef}
-              className="mt-2 w-full px-3 py-2 border border-ci-gray rounded-lg bg-ci-gray focus:outline-none focus:border-gray-400"
+              className="mt-2 w-full px-3 py-2 border border-ci-gray rounded-lg bg-ci-gray
+              focus:outline-none focus:border-gray-400
+              disabled:bg-opacity-50"
+              disabled={isLoading}
             />
           </div>
-          <div className="text-red-700 leading-5 min-h-5">{error}</div>
-          <button className="w-full max-w-[384px] px-3 py-2 text-white rounded-lg bg-ci-green border border-ci-green focus:outline-none focus:border-black">
+          <div className="text-red-700 leading-5 min-h-5 w-full text-left">{error}</div>
+          <button
+            className="w-full max-w-[384px] px-3 py-2 text-white rounded-lg bg-ci-green border border-transparent
+            focus:outline-none focus:border-black
+            disabled:bg-opacity-50"
+            disabled={isLoading}
+          >
             Login
           </button>
         </form>
