@@ -7,7 +7,7 @@ type BookingCardProps = {
 
 export default function BookingCard({ booking }: BookingCardProps) {
   return (
-    <div className="flex gap-8 mb-4">
+    <div className="flex gap-8 flex-col sm:flex-row items-center">
       <div className="relative rounded-full w-40 aspect-square overflow-hidden">
         <Image
           alt="dentist picture"
