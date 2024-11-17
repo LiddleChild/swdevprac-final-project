@@ -2,9 +2,16 @@
 
 import { signOut, useSession } from "next-auth/react";
 import TopMenuItem from "./TopMenuItem";
+import { useRouter } from "next/navigation";
 
 export default function TopMenu() {
   const session = useSession();
+  const router = useRouter();
+
+  const logoutHandler = () => {
+    signOut();
+    router.push("/");
+  };
 
   return (
     <div className="fixed top-0 left-0 h-screen flex flex-col justify-between items-center bg-[#15B69B] group hover:w-[15%] transition-all duration-300 w-[5%] z-10">
@@ -18,7 +25,7 @@ export default function TopMenu() {
       </div>
       <div className="mb-8 h-20 w-full">
         {session.data ? (
-          <TopMenuItem onClick={() => signOut()} title="Logout" icon="Logout" />
+          <TopMenuItem onClick={logoutHandler} title="Logout" icon="Logout" />
         ) : (
           <TopMenuItem title="Login" icon="Login" pageRef="/login" />
         )}
