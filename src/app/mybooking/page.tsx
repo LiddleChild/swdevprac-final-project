@@ -1,8 +1,8 @@
-import BookingActionPanel from "@/components/BookingActionPanel";
 import BookingCard from "@/components/BookingCard";
 import HorizontalDivider from "@/components/HorizontalDivider";
 import { getSession } from "@/libs/auth/nextAuthConfig";
 import getBooking from "@/libs/getBooking";
+import Link from "next/link";
 
 export default async function MyBookingPage() {
   const session = await getSession();
@@ -17,13 +17,17 @@ export default async function MyBookingPage() {
         <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-row justify-between items-center px-2">
             <div className="text-2xl sm:text-4xl">My Booking</div>
-            <BookingActionPanel hasBooking={!!booking} bookingId={booking?._id} />
           </div>
           <HorizontalDivider />
           {booking ? (
             <BookingCard booking={booking} />
           ) : (
-            <div className="w-full py-12 flex justify-center items-center">No booking made</div>
+            <div className="w-full py-12 flex justify-center items-center flex-col gap-2">
+              <div>No booking found</div>
+              <Link href="/booking/create" className="text-ci-green">
+                Make booking
+              </Link>
+            </div>
           )}
         </div>
       </div>

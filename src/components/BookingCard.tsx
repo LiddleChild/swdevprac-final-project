@@ -1,5 +1,6 @@
 import { formatDate, formatTelNumber } from "@/libs/utils/date";
 import Image from "next/image";
+import BookingActionPanel from "./BookingActionPanel";
 
 type BookingCardProps = {
   booking: BookingItem;
@@ -30,6 +31,7 @@ export default function BookingCard({ booking }: BookingCardProps) {
           {formatDate(new Date(booking.createdAt))}
         </div>
       </div>
+      <BookingActionPanel bookingId={booking?._id} />
     </div>
   );
 }
