@@ -22,6 +22,11 @@ interface DentistJson {
   data: DentistItem;
 }
 
+interface BookingJson {
+  succcess: boolean;
+  data: BookingItem;
+}
+
 interface BookingsJson {
   success: boolean;
   count: number;

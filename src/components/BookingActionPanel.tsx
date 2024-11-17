@@ -33,7 +33,7 @@ export default function BookingActionPanel({ bookingId }: BookingActionPanelProp
   return (
     <div className="flex flex-row gap-4">
       <Link
-        href="/"
+        href={`/booking/${bookingId}/edit`}
         className="text-gray-600 flex justify-center items-center rounded-lg p-2 hover:text-ci-green hover:bg-gray-100"
       >
         <span className="material-symbols-outlined flex-shrink-0 text-center">edit</span>

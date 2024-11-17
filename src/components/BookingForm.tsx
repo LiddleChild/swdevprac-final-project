@@ -1,6 +1,7 @@
 "use client";
 
 import createBooking from "@/libs/createBooking";
+import updateBooking from "@/libs/updateBooking";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,17 +11,20 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-type CreateBookingFormProps = {
+type BookingFormProps = {
   dentists: DentistItem[];
+  booking?: BookingItem;
 };
 
-export default function CreateBookingForm({ dentists }: CreateBookingFormProps) {
+export default function BookingForm({ dentists, booking }: BookingFormProps) {
   const session = useSession();
   const router = useRouter();
 
-  const [dentist, setDentist] = useState<string | undefined>("");
-  const [date, setDate] = useState<Dayjs>(dayjs(Date.now()));
+  const [dentist, setDentist] = useState<string | undefined>(booking?.dentist._id ?? "");
+  const [date, setDate] = useState<Dayjs>(dayjs(booking?.bookingDate ?? Date.now()));
   const [error, setError] = useState<string | undefined>(undefined);
+
+  const isUpdate = !!booking;
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,9 +39,20 @@ export default function CreateBookingForm({ dentists }: CreateBookingFormProps) 
       return;
     }
 
-    toast.promise(
-      createBooking(session.data, dentist, date.toDate().toISOString().replace(/T.*/, "")),
-      {
+    const formattedDate = date.toDate().toISOString().replace(/T.*/, "");
+
+    if (isUpdate) {
+      toast.promise(updateBooking(session.data, booking._id, formattedDate), {
+        loading: "Updating booking...",
+        success: () => {
+          router.push("/mybooking");
+          router.refresh();
+          return "Updated!";
+        },
+        error: (err) => err.message,
+      });
+    } else {
+      toast.promise(createBooking(session.data, dentist, formattedDate), {
         loading: "Creating booking...",
         success: () => {
           router.push("/mybooking");
@@ -45,26 +60,30 @@ export default function CreateBookingForm({ dentists }: CreateBookingFormProps) 
           return "Created!";
         },
         error: (err) => err.message,
-      }
-    );
+      });
+    }
   };
 
   return (
     <form onSubmit={onSubmitHandler} className="flex flex-col gap-2">
       <div className="text-red-700 w-full text-left">{error}</div>
-      <div className="text-lg">Dentist</div>
-      <Select
-        className="w-full"
-        value={dentist}
-        onChange={(event: SelectChangeEvent) => setDentist(event.target.value)}
-        displayEmpty
-      >
-        {dentists.map((dentist) => (
-          <MenuItem value={dentist._id} key={dentist._id}>
-            {dentist.name}
-          </MenuItem>
-        ))}
-      </Select>
+      {!isUpdate && (
+        <>
+          <div className="text-lg">Dentist</div>
+          <Select
+            className="w-full"
+            value={dentist}
+            onChange={(event: SelectChangeEvent) => setDentist(event.target.value)}
+            displayEmpty
+          >
+            {dentists.map((dentist) => (
+              <MenuItem value={dentist._id} key={dentist._id}>
+                {dentist.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </>
+      )}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           value={date}
@@ -77,7 +96,7 @@ export default function CreateBookingForm({ dentists }: CreateBookingFormProps) 
             focus:outline-none focus:border-black
             disabled:bg-opacity-50"
       >
-        Create booking
+        {isUpdate ? "Update booking" : "Create booking"}
       </button>
     </form>
   );
