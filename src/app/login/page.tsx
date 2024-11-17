@@ -1,5 +1,6 @@
 "use client";
 
+import InputField from "@/components/auth/InputField";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -48,28 +49,14 @@ export default function Login() {
           onSubmit={submitHandler}
         >
           <div className="text-4xl mb-4">Login</div>
-          <div className="w-full max-w-[384px]">
-            <div className="text-lg">Email</div>
-            <input
-              type="text"
-              ref={emailRef}
-              className="mt-2 w-full px-3 py-2 border border-ci-gray rounded-lg bg-ci-gray
-              focus:outline-none focus:border-gray-400
-              disabled:bg-opacity-50"
-              disabled={isLoading}
-            />
-          </div>
-          <div className="w-full max-w-[384px]">
-            <div className="text-lg">Password</div>
-            <input
-              type="text"
-              ref={passwordRef}
-              className="mt-2 w-full px-3 py-2 border border-ci-gray rounded-lg bg-ci-gray
-              focus:outline-none focus:border-gray-400
-              disabled:bg-opacity-50"
-              disabled={isLoading}
-            />
-          </div>
+          <InputField label="Email" name="email" inputRef={emailRef} disabled={isLoading} />
+          <InputField
+            type="password"
+            label="Password"
+            name="password"
+            inputRef={passwordRef}
+            disabled={isLoading}
+          />
           <div className="text-red-700 leading-5 min-h-5 w-full text-left">{error}</div>
           <button
             className="w-full max-w-[384px] px-3 py-2 text-white rounded-lg bg-ci-green border border-transparent

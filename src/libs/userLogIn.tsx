@@ -20,7 +20,7 @@ export default async function userLogIn(email: string, password: string) {
     throw new Error("Something went wrong. Please try again later.");
   }
 
-  if (!response.ok) {
+  if (!content.success) {
     throw new Error(content.msg);
   }
 
