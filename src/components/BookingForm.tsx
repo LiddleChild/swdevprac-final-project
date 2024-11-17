@@ -20,6 +20,7 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
   const session = useSession();
   const router = useRouter();
 
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [dentist, setDentist] = useState<string | undefined>(booking?.dentist._id ?? "");
   const [date, setDate] = useState<Dayjs>(dayjs(booking?.bookingDate ?? Date.now()));
   const [error, setError] = useState<string | undefined>(undefined);
@@ -41,26 +42,31 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
 
     const formattedDate = date.toDate().toISOString().replace(/T.*/, "");
 
+    setLoading(true);
     if (isUpdate) {
-      toast.promise(updateBooking(session.data, booking._id, formattedDate), {
-        loading: "Updating booking...",
-        success: () => {
-          router.push("/mybooking");
-          router.refresh();
-          return "Updated!";
-        },
-        error: (err) => err.message,
-      });
+      toast
+        .promise(updateBooking(session.data, booking._id, formattedDate), {
+          loading: "Updating booking...",
+          success: () => {
+            router.push("/mybooking");
+            router.refresh();
+            return "Updated!";
+          },
+          error: (err) => err.message,
+        })
+        .then(() => setLoading(false));
     } else {
-      toast.promise(createBooking(session.data, dentist, formattedDate), {
-        loading: "Creating booking...",
-        success: () => {
-          router.push("/mybooking");
-          router.refresh();
-          return "Created!";
-        },
-        error: (err) => err.message,
-      });
+      toast
+        .promise(createBooking(session.data, dentist, formattedDate), {
+          loading: "Creating booking...",
+          success: () => {
+            router.push("/mybooking");
+            router.refresh();
+            return "Created!";
+          },
+          error: (err) => err.message,
+        })
+        .then(() => setLoading(false));
     }
   };
 
@@ -74,6 +80,7 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
             className="w-full"
             value={dentist}
             onChange={(event: SelectChangeEvent) => setDentist(event.target.value)}
+            disabled={isLoading}
             displayEmpty
           >
             {dentists.map((dentist) => (
@@ -89,9 +96,11 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
           value={date}
           onChange={(date) => setDate(date!)}
           slotProps={{ actionBar: { actions: [] } }}
+          disabled={isLoading}
         />
       </LocalizationProvider>
       <button
+        disabled={isLoading}
         className="w-full px-3 py-2 text-white rounded-lg bg-ci-green border border-transparent
             focus:outline-none focus:border-black
             disabled:bg-opacity-50"
