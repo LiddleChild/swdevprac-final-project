@@ -4,12 +4,13 @@ import "./globals.css";
 import TopMenu from "@/components/TopMenu";
 import { getServerSession } from "next-auth";
 import NextAuthProvider from "@/providers/NextAuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const notoSansThai = Noto_Sans_Thai({ subsets: [] });
 
 export const metadata: Metadata = {
-  title: "Vaccine Booking",
-  description: "Vaccine booking app",
+  title: "Dentist Booking",
+  description: "Dentist booking app",
 };
 
 export default async function RootLayout({
@@ -30,6 +31,7 @@ export default async function RootLayout({
       <body className={`${notoSansThai.className} flex flex-col w-full h-screen`}>
         <NextAuthProvider session={nextAuthSession}>
           <div className="flex flex-row">
+            <Toaster position="top-center" />
             <TopMenu />
             <div className="size-full ml-[5%] h-screen">{children}</div>
           </div>
