@@ -22,10 +22,17 @@ interface DentistJson {
   data: DentistItem;
 }
 
+interface BookingsJson {
+  success: boolean;
+  count: number;
+  data: BookingItem[];
+}
+
 interface BookingItem {
-  name: string;
-  surname: string;
-  id: string;
-  hospital: string;
-  bookDate: string;
+  _id: string;
+  bookingDate: string;
+  user: string;
+  dentist: DentistItem;
+  createdAt: string;
+  __v: number;
 }

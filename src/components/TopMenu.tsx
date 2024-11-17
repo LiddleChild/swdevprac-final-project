@@ -13,7 +13,7 @@ export default function TopMenu() {
           <TopMenuItem title="Dentist" icon="Dentistry" pageRef="/dentist" />
         </div>
         <div className="h-20 w-full">
-          <TopMenuItem title="Booking" icon="calendar_today" pageRef="/booking" />
+          <TopMenuItem title="Booking" icon="calendar_today" pageRef="/mybooking" />
         </div>
       </div>
       <div className="mb-8 h-20 w-full">
