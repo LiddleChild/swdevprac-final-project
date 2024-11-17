@@ -2,7 +2,7 @@ export default async function userLogIn(email: string, password: string) {
   let response;
   let content;
   try {
-    const url = new URL(`/api/v1/auth/login`, process.env.BACKEND_URL).href;
+    const url = new URL(`/api/v1/auth/login`, process.env.NEXT_PUBLIC_BACKEND_URL).href;
     response = await fetch(url, {
       method: "POST",
       headers: {

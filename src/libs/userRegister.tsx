@@ -9,7 +9,7 @@ export default async function userRegister(userInfo: UserRegistrationInfo) {
   let response;
   let content;
   try {
-    const url = new URL(`/api/v1/auth/register`, process.env.BACKEND_URL).href;
+    const url = new URL(`/api/v1/auth/register`, process.env.NEXT_PUBLIC_BACKEND_URL).href;
     response = await fetch(url, {
       method: "POST",
       headers: {
