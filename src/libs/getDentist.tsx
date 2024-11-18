@@ -1,7 +1,5 @@
-import { URL } from "url";
-
 export default async function getDentist(id: string): Promise<DentistJson> {
-  const url = new URL(`/api/v1/dentists/${id}`, "http://localhost:5000/").href;
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/dentists/${id}`;
   const response = await fetch(url);
   const json = (await response.json()) as DentistJson;
 

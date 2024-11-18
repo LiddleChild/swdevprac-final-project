@@ -1,14 +1,30 @@
+"use client";
 import DentistCatalog from "@/components/DentistCatalog";
 import getDentists from "@/libs/getDentists";
 import { LinearProgress } from "@mui/material";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function Page() {
-  const dentistsJson = getDentists();
+  const [dentistsJson, setDentistsJson] = useState<DentistsJson | null>(null);
+
+  useEffect(() => {
+    const fetchDentists = async () => {
+      const data = await getDentists();
+      setDentistsJson(data);
+    };
+
+    fetchDentists();
+  }, []);
 
   return (
-    <Suspense fallback={<LinearProgress />}>
-      <DentistCatalog dentistsJson={dentistsJson} />
-    </Suspense>
+    <div>
+      <Suspense fallback={<LinearProgress />}>
+        {dentistsJson ? (
+          <DentistCatalog dentistsJson={Promise.resolve(dentistsJson)} />
+        ) : (
+          <LinearProgress />
+        )}
+      </Suspense>
+    </div>
   );
 }
