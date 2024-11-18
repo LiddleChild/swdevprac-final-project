@@ -11,10 +11,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-type BookingFormProps = {
-  dentists: DentistItem[];
-  booking?: BookingItem;
-};
+type BookingFormProps =
+  | {
+      dentists: DentistItem[];
+      booking?: never;
+    }
+  | {
+      dentists?: never;
+      booking: BookingItem;
+    };
 
 export default function BookingForm({ dentists, booking }: BookingFormProps) {
   const session = useSession();

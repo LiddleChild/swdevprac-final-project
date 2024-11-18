@@ -70,7 +70,7 @@ export default function Login() {
         <div className="border-b border-gray-500 w-full"></div>
         <div className="text-center">
           <span className="mr-2">No account yet?</span>
-          <Link href="/register" className="text-ci-green">
+          <Link href="/register" className="text-ci-green" prefetch>
             Register Now
           </Link>
         </div>

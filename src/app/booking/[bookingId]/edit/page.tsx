@@ -2,14 +2,12 @@ import BookingForm from "@/components/BookingForm";
 import HorizontalDivider from "@/components/HorizontalDivider";
 import { getSession } from "@/libs/auth/nextAuthConfig";
 import getBookingById from "@/libs/getBookingById";
-import getDentists from "@/libs/getDentists";
 
 type EditBookingProps = {
   params: { bookingId: string };
 };
 
 export default async function EditBooking({ params: { bookingId } }: EditBookingProps) {
-  const dentists = await getDentists();
   const session = await getSession();
   const booking = session ? await getBookingById(session, bookingId) : null;
 
@@ -24,7 +22,7 @@ export default async function EditBooking({ params: { bookingId } }: EditBooking
             <div className="text-2xl sm:text-4xl">Update booking</div>
           </div>
           <HorizontalDivider />
-          <BookingForm dentists={dentists.data} booking={booking ?? undefined} />
+          <BookingForm booking={booking!} />
         </div>
       </div>
     </div>

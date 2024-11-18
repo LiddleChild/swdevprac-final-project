@@ -24,7 +24,11 @@ export default async function MyBookingPage() {
           ) : (
             <div className="w-full py-12 flex justify-center items-center flex-col gap-2">
               <div>No booking found</div>
-              <Link href="/booking/create" className="text-ci-green">
+              <Link
+                href={{ pathname: "/booking/create", query: { from: "mybooking" } }}
+                className="text-ci-green"
+                prefetch
+              >
                 Make booking
               </Link>
             </div>
