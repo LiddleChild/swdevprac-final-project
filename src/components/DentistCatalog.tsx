@@ -22,7 +22,7 @@ export default async function DentistCatalog({
         </Link>
       </div>
       <hr className="border-t border-black" />
-      <div className="grid grid-cols-2 gap-x-40 gap-y-10 justify-start mx-20 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-10 justify-start mx-20 mt-4">
         {dentists.data.map((dentist) => (
           <Card key={dentist.id} dentist={dentist} />
         ))}

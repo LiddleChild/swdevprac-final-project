@@ -28,12 +28,14 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         />
       </head>
-      <body className={`${notoSansThai.className} flex flex-col w-full h-screen`}>
+      <body
+        className={`${notoSansThai.className} flex flex-col w-full h-screen`}
+      >
         <NextAuthProvider session={nextAuthSession}>
           <div className="flex flex-row">
             <Toaster position="top-center" />
             <TopMenu />
-            <div className="size-full ml-[5%] h-screen">{children}</div>
+            <div className="size-full ml-24 h-screen">{children}</div>
           </div>
         </NextAuthProvider>
       </body>
