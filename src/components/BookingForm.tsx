@@ -7,7 +7,7 @@ import { LocalizationProvider, StaticDatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -18,7 +18,9 @@ type BookingFormProps = {
 
 export default function BookingForm({ dentists, booking }: BookingFormProps) {
   const session = useSession();
+
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [isLoading, setLoading] = useState<boolean>(false);
   const [dentist, setDentist] = useState<string | undefined>(booking?.dentist._id ?? "");
@@ -42,13 +44,27 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
 
     const formattedDate = date.toDate().toISOString().replace(/T.*/, "");
 
+    const fromPage = searchParams.get("from");
+    let callbackUrl;
+    switch (fromPage) {
+      case "mybooking":
+        callbackUrl = "/mybooking";
+        break;
+      case "manage":
+        callbackUrl = "/booking/manage";
+        break;
+      default:
+        callbackUrl = "/";
+        break;
+    }
+
     setLoading(true);
     if (isUpdate) {
       toast
         .promise(updateBooking(session.data, booking._id, formattedDate), {
           loading: "Updating booking...",
           success: () => {
-            router.push("/mybooking");
+            router.push(callbackUrl);
             router.refresh();
             return "Updated!";
           },
@@ -60,7 +76,7 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
         .promise(createBooking(session.data, dentist, formattedDate), {
           loading: "Creating booking...",
           success: () => {
-            router.push("/mybooking");
+            router.push(callbackUrl);
             router.refresh();
             return "Created!";
           },

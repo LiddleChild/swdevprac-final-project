@@ -31,7 +31,7 @@ export default function FullBookingCard({ booking }: BookingCardProps) {
           </div>
         </div>
       </div>
-      <BookingActionPanel bookingId={booking?._id} />
+      <BookingActionPanel bookingId={booking?._id} from="manage" />
     </div>
   );
 }

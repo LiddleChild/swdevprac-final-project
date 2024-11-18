@@ -8,9 +8,10 @@ import toast from "react-hot-toast";
 
 type BookingActionPanelProps = {
   bookingId?: string;
+  from: string;
 };
 
-export default function BookingActionPanel({ bookingId }: BookingActionPanelProps) {
+export default function BookingActionPanel({ bookingId, from }: BookingActionPanelProps) {
   const session = useSession();
   const router = useRouter();
 
@@ -33,7 +34,7 @@ export default function BookingActionPanel({ bookingId }: BookingActionPanelProp
   return (
     <div className="flex flex-row gap-4">
       <Link
-        href={`/booking/${bookingId}/edit`}
+        href={{ pathname: `/booking/${bookingId}/edit`, query: { from } }}
         className="text-gray-600 flex justify-center items-center rounded-lg p-2 hover:text-ci-green hover:bg-gray-100"
       >
         <span className="material-symbols-outlined flex-shrink-0 text-center">edit</span>

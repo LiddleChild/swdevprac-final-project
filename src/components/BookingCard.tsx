@@ -33,7 +33,7 @@ export default function BookingCard({ booking }: BookingCardProps) {
           </div>
         </div>
       </div>
-      <BookingActionPanel bookingId={booking?._id} />
+      <BookingActionPanel bookingId={booking?._id} from="mybooking" />
     </div>
   );
 }
