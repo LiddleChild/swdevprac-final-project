@@ -13,6 +13,8 @@ export default async function updateBooking(session: Session, bookingId: string,
     }),
   });
 
+  if (!response.ok) throw new Error("Failed to get booking. Please try again later.");
+
   const content = await response.json();
 
   if (!content.success) {
