@@ -20,19 +20,11 @@ export default function TopMenu() {
           <TopMenuItem title="Dentist" icon="Dentistry" pageRef="/dentist" />
         </div>
         <div className="h-20 w-full">
-          <TopMenuItem
-            title="Booking"
-            icon="calendar_today"
-            pageRef="/mybooking"
-          />
+          <TopMenuItem title="Booking" icon="calendar_today" pageRef="/mybooking" />
         </div>
         {session.data?.user.role === "admin" && (
           <div className="h-20 w-full">
-            <TopMenuItem
-              title="Manage Booking"
-              icon="edit_calendar"
-              pageRef="/booking/manage"
-            />
+            <TopMenuItem title="Manage Booking" icon="edit_calendar" pageRef="/booking/manage" />
           </div>
         )}
       </div>
