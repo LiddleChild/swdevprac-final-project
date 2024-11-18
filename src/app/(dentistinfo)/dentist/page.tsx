@@ -18,11 +18,11 @@ export default function Page() {
 
   return (
     <div>
-      <Suspense fallback={<LinearProgress />}>
+      <Suspense fallback={<LinearProgress className="text-ci-green" color="inherit" />}>
         {dentistsJson ? (
           <DentistCatalog dentistsJson={Promise.resolve(dentistsJson)} />
         ) : (
-          <LinearProgress />
+          <LinearProgress className="text-ci-green" color="inherit" />
         )}
       </Suspense>
     </div>
