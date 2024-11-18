@@ -9,7 +9,7 @@ export default withAuth(function middleware(req) {}, {
         return false;
       }
 
-      return true;
+      return !!token;
     },
   },
 });
