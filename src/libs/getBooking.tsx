@@ -9,8 +9,6 @@ export default async function getMyBooking(session: Session): Promise<BookingIte
     },
   });
 
-  if (!response.ok) throw new Error("Failed to get booking. Please try again later.");
-
   const content = (await response.json()) as BookingsJson;
 
   const myBooking = content.data.filter((booking) => booking.user._id === session.user._id);

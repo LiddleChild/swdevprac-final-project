@@ -8,8 +8,6 @@ export default async function getBookings(session: Session): Promise<BookingItem
     },
   });
 
-  if (!response.ok) throw new Error("Failed to get bookings. Please try again later.");
-
   const content = (await response.json()) as BookingsJson;
 
   return content.data;

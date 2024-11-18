@@ -11,8 +11,6 @@ export default async function getBookingById(
     },
   });
 
-  if (!response.ok) throw new Error("Failed to get booking. Please try again later.");
-
   const content = await response.json();
 
   if (!content.success) {
