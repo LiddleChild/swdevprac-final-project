@@ -11,7 +11,7 @@ export default async function getMyBooking(session: Session): Promise<BookingIte
 
   const json = (await response.json()) as BookingsJson;
 
-  const myBooking = json.data.filter((booking) => booking.user === session.user._id);
+  const myBooking = json.data.filter((booking) => booking.user._id === session.user._id);
 
   return myBooking.length > 0 ? myBooking[0] : null;
 }

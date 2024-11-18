@@ -15,6 +15,9 @@ export default function TopMenu() {
         <div className="h-20 w-full">
           <TopMenuItem title="Booking" icon="calendar_today" pageRef="/mybooking" />
         </div>
+        <div className="h-20 w-full">
+          <TopMenuItem title="Manage Booking" icon="edit_calendar" pageRef="/booking/manage" />
+        </div>
       </div>
       <div className="mb-8 h-20 w-full">
         {session.data ? (

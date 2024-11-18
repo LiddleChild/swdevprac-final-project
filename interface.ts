@@ -36,8 +36,14 @@ interface BookingsJson {
 interface BookingItem {
   _id: string;
   bookingDate: string;
-  user: string;
+  user: User;
   dentist: DentistItem;
   createdAt: string;
   __v: number;
+}
+
+interface User {
+  _id: string;
+  name: string;
+  email: string;
 }

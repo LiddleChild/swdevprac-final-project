@@ -40,6 +40,7 @@ export default function TopMenuItem({ icon, title, pageRef, onClick }: TopMenuIt
       <Link
         href={pageRef}
         className="flex flex-row items-center justify-start gap-4 h-full w-full px-6 hover:bg- group"
+        prefetch
       >
         <Item icon={icon} title={title} />
       </Link>

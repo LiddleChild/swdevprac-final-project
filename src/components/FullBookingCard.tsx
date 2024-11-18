@@ -6,11 +6,11 @@ type BookingCardProps = {
   booking: BookingItem;
 };
 
-export default function BookingCard({ booking }: BookingCardProps) {
+export default function FullBookingCard({ booking }: BookingCardProps) {
   return (
     <div className="flex gap-8 flex-col sm:flex-row items-center justify-between">
       <div className="flex gap-4">
-        <div className="relative rounded-full w-40 aspect-square overflow-hidden">
+        <div className="relative rounded-full w-24 aspect-square overflow-hidden">
           <Image
             alt="dentist picture"
             src={booking.dentist.picture}
@@ -19,10 +19,8 @@ export default function BookingCard({ booking }: BookingCardProps) {
           />
         </div>
         <div className="flex flex-col justify-center">
-          <div className="text-xl">{booking.dentist.name}</div>
-          <div>{booking.dentist.hospital}</div>
-          <div>{booking.dentist.address}</div>
-          <div>{formatTelNumber(booking.dentist.tel).join(" ")}</div>
+          <div className="text-xl">{booking.user.name}</div>
+          <div>{booking.dentist.name}</div>
           <div>
             <span className="font-semibold">Appointment Date: </span>
             {formatDate(new Date(booking.bookingDate))}
