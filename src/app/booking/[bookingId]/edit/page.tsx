@@ -13,8 +13,6 @@ export default async function EditBooking({ params: { bookingId } }: EditBooking
   const session = await getSession();
   const booking = session ? await getBookingById(session, bookingId) : null;
 
-  console.log(session);
-
   return (
     <div className="flex justify-center items-center size-full p-2">
       <div

@@ -2,7 +2,6 @@ import FullBookingCard from "@/components/FullBookingCard";
 import HorizontalDivider from "@/components/HorizontalDivider";
 import { getSession } from "@/libs/auth/nextAuthConfig";
 import getBookings from "@/libs/getBookings";
-import Link from "next/link";
 import React from "react";
 
 export default async function ManageBooking() {
@@ -27,12 +26,12 @@ export default async function ManageBooking() {
               </React.Fragment>
             ))
           ) : (
-            <div className="w-full py-12 flex justify-center items-center flex-col gap-2">
-              <div>No booking found</div>
-              <Link href="/booking/create" className="text-ci-green">
-                Make booking
-              </Link>
-            </div>
+            <>
+              <HorizontalDivider />
+              <div className="w-full py-12 flex justify-center items-center flex-col gap-2">
+                No booking found
+              </div>
+            </>
           )}
         </div>
       </div>
