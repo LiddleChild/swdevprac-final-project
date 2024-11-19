@@ -17,36 +17,6 @@ describe("getDentists", () => {
         address: "123",
         expertist: "Orthodontist",
         tel: "123-456-7890",
-        picture: "dentist_a.png",
-        __v: 0,
-        id: "1",
-      },
-      {
-        _id: "2",
-        name: "Dent. B",
-        hospital: "Clinic B",
-        address: "456",
-        expertist: "Pediatric Dentist",
-        tel: "098-765-4321",
-        picture: "dentist_b.png",
-        __v: 0,
-        id: "2",
-      },
-    ],
-  };
-
-  const mockDentistsPromise = Promise.resolve({
-    success: true,
-    count: 2,
-    pagination: {},
-    data: [
-      {
-        _id: "1",
-        name: "Dent. A",
-        hospital: "Hospital A",
-        address: "123",
-        expertist: "Orthodontist",
-        tel: "123-456-7890",
         picture: "/dentist_a.png",
         __v: 0,
         id: "1",
@@ -63,7 +33,9 @@ describe("getDentists", () => {
         id: "2",
       },
     ],
-  });
+  };
+
+  const mockDentistsPromise = Promise.resolve(mockDentistsJson);
 
   beforeEach(() => {
     (fetch as jest.Mock).mockClear();
