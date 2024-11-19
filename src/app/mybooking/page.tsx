@@ -1,10 +1,19 @@
 import BookingCard from "@/components/BookingCard";
 import HorizontalDivider from "@/components/HorizontalDivider";
+import Loading from "@/components/Loading";
 import { getSession } from "@/libs/auth/nextAuthConfig";
 import getBooking from "@/libs/getBooking";
 import Link from "next/link";
 
-export default async function MyBookingPage() {
+export default async function Home() {
+  return (
+    <Loading>
+      <MyBookingPage />;
+    </Loading>
+  );
+}
+
+async function MyBookingPage() {
   const session = await getSession();
   const booking = session ? await getBooking(session) : null;
 
@@ -27,7 +36,6 @@ export default async function MyBookingPage() {
               <Link
                 href={{ pathname: "/booking/create", query: { from: "mybooking" } }}
                 className="text-ci-green"
-                prefetch
               >
                 Make booking
               </Link>

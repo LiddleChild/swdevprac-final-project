@@ -1,8 +1,17 @@
 import BookingForm from "@/components/BookingForm";
 import HorizontalDivider from "@/components/HorizontalDivider";
+import Loading from "@/components/Loading";
 import getDentists from "@/libs/getDentists";
 
-export default async function CreateBooking() {
+export default async function Home() {
+  return (
+    <Loading>
+      <CreateBooking />;
+    </Loading>
+  );
+}
+
+async function CreateBooking() {
   const dentists = await getDentists();
 
   return (

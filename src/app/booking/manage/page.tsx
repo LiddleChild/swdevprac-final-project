@@ -1,10 +1,19 @@
 import FullBookingCard from "@/components/FullBookingCard";
 import HorizontalDivider from "@/components/HorizontalDivider";
+import Loading from "@/components/Loading";
 import { getSession } from "@/libs/auth/nextAuthConfig";
 import getBookings from "@/libs/getBookings";
 import React from "react";
 
-export default async function ManageBooking() {
+export default async function Home() {
+  return (
+    <Loading>
+      <ManageBooking />;
+    </Loading>
+  );
+}
+
+async function ManageBooking() {
   const session = await getSession();
   const bookings = session ? await getBookings(session) : null;
 

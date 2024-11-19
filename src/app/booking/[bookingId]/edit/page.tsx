@@ -1,5 +1,6 @@
 import BookingForm from "@/components/BookingForm";
 import HorizontalDivider from "@/components/HorizontalDivider";
+import Loading from "@/components/Loading";
 import { getSession } from "@/libs/auth/nextAuthConfig";
 import getBookingById from "@/libs/getBookingById";
 
@@ -7,7 +8,15 @@ type EditBookingProps = {
   params: { bookingId: string };
 };
 
-export default async function EditBooking({ params: { bookingId } }: EditBookingProps) {
+export default async function Home(props: EditBookingProps) {
+  return (
+    <Loading>
+      <EditBooking {...props} />;
+    </Loading>
+  );
+}
+
+async function EditBooking({ params: { bookingId } }: EditBookingProps) {
   const session = await getSession();
   const booking = session ? await getBookingById(session, bookingId) : null;
 

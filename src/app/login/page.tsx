@@ -33,6 +33,7 @@ export default function Login() {
 
     if (response!.ok) {
       router.push("/");
+      router.refresh();
     } else {
       setError(response!.error);
     }
@@ -70,7 +71,7 @@ export default function Login() {
         <div className="border-b border-gray-500 w-full"></div>
         <div className="text-center">
           <span className="mr-2">No account yet?</span>
-          <Link href="/register" className="text-ci-green" prefetch>
+          <Link href="/register" className="text-ci-green">
             Register Now
           </Link>
         </div>

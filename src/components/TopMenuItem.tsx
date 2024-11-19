@@ -34,18 +34,12 @@ type TopMenuItemProps =
           }
       );
 
-export default function TopMenuItem({
-  icon,
-  title,
-  pageRef,
-  onClick,
-}: TopMenuItemProps) {
+export default function TopMenuItem({ icon, title, pageRef, onClick }: TopMenuItemProps) {
   if (pageRef)
     return (
       <Link
         href={pageRef}
         className="flex flex-row items-center justify-start gap-4 h-full w-full px-6 hover:bg-[#009078] group"
-        prefetch
       >
         <Item icon={icon} title={title} />
       </Link>
