@@ -3,6 +3,7 @@ import { screen, render } from "@testing-library/react";
 import Banner from "@/components/Banner";
 import MyBookingPage from "@/components/MyBookingPage";
 import TopMenu from "@/components/TopMenu";
+import { useSession } from "next-auth/react";
 
 jest.mock("../src/libs/getBooking", () => ({
   __esModule: true,
@@ -13,7 +14,7 @@ jest.mock("../src/libs/getBooking", () => ({
       hospital: "hospital",
       address: "address",
       tel: "tel",
-      picture: "https://drive.google.com/uc?id=1QjsdRHmmchDzyHJM4G3jCdUGLieAI4mK",
+      picture: "/mock-image.png",
     },
   }),
 }));
@@ -32,20 +33,10 @@ jest.mock("../src/libs/auth/nextAuthConfig", () => ({
 
 jest.mock("next-auth/react", () => {
   const originalModule = jest.requireActual("next-auth/react");
-  const mockSession = {
-    expires: new Date(Date.now() + 2 * 86400).toISOString(),
-    user: {
-      name: "asdfasdf",
-      role: "user",
-    },
-  };
-
   return {
     __esModule: true,
     ...originalModule,
-    useSession: jest.fn(() => {
-      return { data: mockSession, status: "authenticated" };
-    }),
+    useSession: jest.fn(),
   };
 });
 
@@ -61,6 +52,17 @@ describe("auth", () => {
   });
 
   it("should display user name from session", () => {
+    useSession.mockReturnValue({
+      data: {
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
+        user: {
+          name: "asdfasdf",
+          role: "user",
+        },
+      },
+      status: "authenticated",
+    });
+
     render(<Banner />);
     expect(screen.getByText("Welcome asdfasdf")).toBeInTheDocument();
   });
@@ -70,8 +72,35 @@ describe("auth", () => {
     expect(screen.getByText("My Booking")).toBeInTheDocument();
   });
 
-  it("should not view manage booking", async () => {
+  it("should not view manage booking with role user", async () => {
+    useSession.mockReturnValue({
+      data: {
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
+        user: {
+          name: "asdfasdf",
+          role: "user",
+        },
+      },
+      status: "authenticated",
+    });
+
     render(<TopMenu />);
     expect(screen.queryByText("Manage Booking")).not.toBeInTheDocument();
+  });
+
+  it("should view manage booking with role admin", async () => {
+    useSession.mockReturnValue({
+      data: {
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
+        user: {
+          name: "asdfasdf",
+          role: "admin",
+        },
+      },
+      status: "authenticated",
+    });
+
+    render(<TopMenu />);
+    expect(screen.queryByText("Manage Booking")).toBeInTheDocument();
   });
 });
