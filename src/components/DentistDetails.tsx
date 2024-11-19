@@ -35,23 +35,18 @@ export default function DentistDetails({ dentist, did }: DentistDetailsProps) {
   };
 
   if (!dentist) {
-    return <LinearProgress />;
+    return <LinearProgress className="text-ci-green" color="inherit" />;
   }
 
   return (
-    <div className="p-8 flex flex-col gap-8 bg-[#8ED3B1] h-screen">
+    <div className="p-8 flex flex-col gap-8 h-screen">
       <div className="flex flex-row justify-between mt-8 items-center mx-4 font-bold text-6xl">
         Dentist
       </div>
       <hr className="border-t border-black" />
       <div className="flex flex-row gap-4 bg-white max-w-full mx-20 mt-4 rounded-lg relative">
         <div className="relative flex w-1/5 h-[256px] rounded-l-lg overflow-hidden">
-          <Image
-            src={dentist.data.picture}
-            alt="dentist"
-            fill
-            style={{ objectFit: "cover" }}
-          />
+          <Image src={dentist.data.picture} alt="dentist" fill style={{ objectFit: "cover" }} />
         </div>
         <div className="ml-4">
           <div className="text-4xl my-8">{dentist.data.name}</div>

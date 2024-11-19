@@ -89,7 +89,7 @@ export default function EditDentist({ params }: { params: { did: string } }) {
     }
   };
 
-  if (loading) return <LinearProgress />;
+  if (loading) return <LinearProgress className="text-ci-green" color="inherit" />;
 
   if (error) return <div className="text-red-500 text-center">{error}</div>;
 
@@ -100,7 +100,7 @@ export default function EditDentist({ params }: { params: { did: string } }) {
   }
 
   return (
-    <div className="p-8 flex flex-col gap-8 bg-[#8ED3B1] h-screen">
+    <div className="p-8 flex flex-col gap-8 h-screen">
       <div className="flex flex-row justify-between mt-8 items-center mx-4">
         <div className="font-bold text-6xl">Edit Dentist Information</div>
       </div>
@@ -108,24 +108,19 @@ export default function EditDentist({ params }: { params: { did: string } }) {
       <div className="flex flex-col gap-4 bg-white max-w-full mx-20 mt-4 rounded-lg items-center">
         {error && <div className="text-red-500 text-center">{error}</div>}
         <form onSubmit={handleSubmit} className="w-full">
-          {["name", "hospital", "address", "expertist", "tel", "picture"].map(
-            (field) => (
-              <div
-                className="flex flex-row gap-2 items-center mt-4"
-                key={field}
-              >
-                <div className="w-20 text-right capitalize">{field}</div>
-                <div className="w-6 text-center">:</div>
-                <input
-                  name={field}
-                  value={(dentist as any)[field]} // Dynamically access field
-                  onChange={handleChange}
-                  className="border border-black rounded-lg flex-1 p-2"
-                  required
-                />
-              </div>
-            )
-          )}
+          {["name", "hospital", "address", "expertist", "tel", "picture"].map((field) => (
+            <div className="flex flex-row gap-2 items-center mt-4" key={field}>
+              <div className="w-20 text-right capitalize">{field}</div>
+              <div className="w-6 text-center">:</div>
+              <input
+                name={field}
+                value={(dentist as any)[field]} // Dynamically access field
+                onChange={handleChange}
+                className="border border-black rounded-lg flex-1 p-2"
+                required
+              />
+            </div>
+          ))}
           <button
             type="submit"
             className="px-4 py-2 bg-[#15B69B] rounded-lg text-xl hover:bg-[#009078] mb-8"

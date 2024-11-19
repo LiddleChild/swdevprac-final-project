@@ -59,7 +59,7 @@ export default function Page() {
   };
 
   return (
-    <div className="p-8 flex flex-col gap-8 bg-[#8ED3B1] h-screen">
+    <div className="p-8 flex flex-col gap-8 h-screen">
       <div className="flex flex-row justify-between mt-8 items-center mx-4">
         <div className="font-bold text-6xl">New Dentist</div>
       </div>

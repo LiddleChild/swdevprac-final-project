@@ -6,13 +6,11 @@ type DentistCatalogProps = {
   dentistsJson: Promise<DentistsJson>;
 };
 
-export default async function DentistCatalog({
-  dentistsJson,
-}: DentistCatalogProps) {
+export default async function DentistCatalog({ dentistsJson }: DentistCatalogProps) {
   const dentists = await dentistsJson;
 
   return (
-    <div className="p-8 flex flex-col gap-8 bg-[#8ED3B1] h-max">
+    <div className="p-8 flex flex-col gap-8 h-max">
       <div className="flex flex-row justify-between mt-8 items-center mx-4">
         <div className="font-bold text-6xl">Dentist Lists</div>
         <Link href="/dentist/create">
