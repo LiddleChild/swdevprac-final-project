@@ -46,7 +46,7 @@ export default function Login() {
       sm:w-full sm:h-fit sm:rounded-lg sm:max-w-[384px]"
       >
         <form
-          className="flex flex-col items-center gap-4 bg-white px-1 rounded-lg w-full"
+          className="flex flex-col items-center gap-4 px-1 rounded-lg w-full"
           onSubmit={submitHandler}
         >
           <div className="text-4xl mb-4">Login</div>

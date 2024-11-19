@@ -93,7 +93,7 @@ export default function BookingForm({ dentists, booking }: BookingFormProps) {
 
   return (
     <form onSubmit={onSubmitHandler} className="flex flex-col gap-2">
-      <div className="text-red-700 w-full text-left">{error}</div>
+      <div className="w-full text-left">{error}</div>
       {!isUpdate && (
         <>
           <div className="text-lg">Dentist</div>

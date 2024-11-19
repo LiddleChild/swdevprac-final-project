@@ -6,14 +6,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Banner() {
-  const covers = [
-    "/img/cover.jpg",
-    "/img/cover2.jpg",
-    "/img/cover3.jpg",
-    "/img/cover4.jpg",
-  ];
-  const [coverIndex, setCoverIndex] = useState<number>(0);
-
   const router = useRouter();
   const session = useSession();
 
@@ -36,10 +28,7 @@ export default function Banner() {
         <div className="font-bold text-5xl">Dentist Service Center</div>
       </div>
       <div className="absolute bottom-0 flex w-full justify-end p-8">
-        <button
-          className="text-xl bg-white px-4 py-2 group z-10"
-          onClick={buttonHandler}
-        >
+        <button className="text-xl bg-white px-4 py-2 group z-10" onClick={buttonHandler}>
           <div className="ease-in-out duration-300 group-hover:translate-x-2 group-hover:duration-100">
             Select Dentist &gt;
           </div>

@@ -8,16 +8,16 @@ type BookingCardProps = {
 
 export default function FullBookingCard({ booking }: BookingCardProps) {
   return (
-    <div className="flex gap-8 flex-col sm:flex-row items-center justify-between">
-      <div className="flex gap-4">
-        <div className="relative rounded-full w-24 aspect-square overflow-hidden">
-          <Image
-            alt="dentist picture"
-            src={booking.dentist.picture}
-            style={{ objectFit: "cover" }}
-            fill
-          />
-        </div>
+    <div className="flex gap-8 flex-col sm:flex-row items-center">
+      <div className="relative rounded-full w-40 aspect-square overflow-hidden flex-grow-0">
+        <Image
+          alt="dentist picture"
+          src={booking.dentist.picture}
+          style={{ objectFit: "cover" }}
+          fill
+        />
+      </div>
+      <div className="flex gap-4 justify-between w-full">
         <div className="flex flex-col justify-center">
           <div className="text-xl">{booking.user.name}</div>
           <div>{booking.dentist.name}</div>
@@ -30,8 +30,8 @@ export default function FullBookingCard({ booking }: BookingCardProps) {
             {formatDate(new Date(booking.createdAt))}
           </div>
         </div>
+        <BookingActionPanel bookingId={booking?._id} from="manage" />
       </div>
-      <BookingActionPanel bookingId={booking?._id} from="manage" />
     </div>
   );
 }

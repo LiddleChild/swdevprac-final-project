@@ -32,7 +32,7 @@ export default function BookingActionPanel({ bookingId, from }: BookingActionPan
   };
 
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-col justify-around items-center sm:flex-row gap-4">
       <Link
         href={{ pathname: `/booking/${bookingId}/edit`, query: { from } }}
         className="text-gray-600 flex justify-center items-center rounded-lg p-2 hover:text-ci-green hover:bg-gray-100"

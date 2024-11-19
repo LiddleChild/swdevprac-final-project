@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import TopMenu from "@/components/TopMenu";
-import { getServerSession } from "next-auth";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import { Toaster } from "react-hot-toast";
 import { getSession } from "@/libs/auth/nextAuthConfig";
