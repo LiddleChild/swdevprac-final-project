@@ -30,7 +30,7 @@ export default function Card({ dentist, rating, dispatchRating }: CardProps) {
   };
 
   return (
-    <Link href={`/dentist/${dentist.id}`}>
+    <Link href={`/dentist/${dentist.id}`} data-testid="dentist-card">
       <InteractiveCard>
         <div className="flex flex-col items-center w-full rounded-lg overflow-hidden border border-black/25 mb-12">
           <div className="relative flex w-full h-96">

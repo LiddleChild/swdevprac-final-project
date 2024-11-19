@@ -78,7 +78,7 @@ describe("getDentists", () => {
     render(catalog);
 
     await waitFor(() => {
-      const dentistCards = screen.getAllByText(/Dent\./);
+      const dentistCards = screen.queryAllByTestId("dentist-card");
       expect(dentistCards.length).toBe(2);
     });
   });

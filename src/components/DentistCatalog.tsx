@@ -6,7 +6,9 @@ type DentistCatalogProps = {
   dentistsJson: Promise<DentistsJson>;
 };
 
-export default async function DentistCatalog({ dentistsJson }: DentistCatalogProps) {
+export default async function DentistCatalog({
+  dentistsJson,
+}: DentistCatalogProps) {
   const dentists = await dentistsJson;
 
   return (
